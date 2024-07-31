@@ -24,20 +24,20 @@ There’s no point in sending the request for every character typed. Instead we�
 In a web-browser, we can setup an event handler – a function that’s called on every change of an input field. Normally, an event handler is called very often, for every typed key. But if we debounce it by 1000ms, then it will be only called once, after 1000ms after the last input.
 */
 
-function debounce(func,timeout){
-    let id=null
-    return function(...args){
-        if(id!=null){
-            clearTimeout(id)
-        }
-        id=setTimeout(()=>{
-            func.apply(this,args)
-            id=null;
-        },timeout)
+function debounce(func, timeout) {
+  let id = null;
+  return function (...args) {
+    if (id != null) {
+      clearTimeout(id);
     }
+    id = setTimeout(() => {
+      func.apply(this, args);
+      id = null;
+    }, timeout);
+  };
 }
 let f = debounce(console.log, 1000);
 
-f("a");
-setTimeout( () => f("b"), 200);
-setTimeout( () => f("c"), 500);
+f('a');
+setTimeout(() => f('b'), 200);
+setTimeout(() => f('c'), 500);

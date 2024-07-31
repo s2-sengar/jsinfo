@@ -43,35 +43,30 @@ f1000(3); // (throttling, 1000ms not out yet)
 P.S. Arguments and the context this passed to f1000 should be passed to the original f.
 */
 
-function throttle(func,delay){
-    let isThrottled=false;
-    let savedArg=null;
-    let savedThis=null;
+function throttle(func, delay) {
+  let isThrottled = false,
+    savedArg;
 
-    function wrapper(...args){
-
-        if(isThrottled){
-            savedArg=args;
-            savedThis=this;
-            return;
-        }
-
-        isThrottled=true;
-        func.apply(this,args)
-
-        setTimeout(()=>{
-            isThrottled=false;
-            if(savedArg){
-                wrapper.apply(savedThis,savedArg)
-                savedArg=savedThis=null;
-            }
-        },delay)
-
+  return function (...args) {
+    if (isThrottled) {
+      savedArg = args;
+      return;
     }
-    return wrapper;
+
+    isThrottled = true;
+    func.apply(this, args);
+
+    setTimeout(() => {
+      isThrottled = false;
+      if (savedArg) {
+        func.apply(this, savedArg);
+        savedArg = null;
+      }
+    }, wait);
+  };
 }
 function f(a) {
-    console.log(a);
+  console.log(a);
 }
 
 // f1000 passes calls to f at maximum once per 1000 ms

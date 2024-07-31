@@ -19,22 +19,22 @@ for (let args of work.calls) {
 P.S. That decorator is sometimes useful for unit-testing. Its advanced form is sinon.spy in Sinon.JS library.
 */
 
-function spy(func){
-    let argsList=[]
-    function wrapperFunction(...args){
-        argsList.push([...args])
-        return func.apply(this,args)
-    }
-    wrapperFunction.calls=argsList;
-    return wrapperFunction;
+function spy(func) {
+  let argsList = [];
+  function wrapperFunction(...args) {
+    argsList.push([...args]);
+    return func.apply(this, args);
+  }
+  wrapperFunction.calls = argsList;
+  return wrapperFunction;
 }
 
 function work(a, b) {
-    console.log( a + b ); // work is an arbitrary function or method
+  console.log(a + b); // work is an arbitrary function or method
 }
 work = spy(work);
 work(1, 2); // 3
 work(4, 5); // 9
 for (let args of work.calls) {
-    console.log( 'call:' + args.join() ); // "call:1,2", "call:4,5"
+  console.log('call:' + args.join()); // "call:1,2", "call:4,5"
 }

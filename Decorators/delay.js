@@ -18,21 +18,21 @@ In the code above, f is a function of a single argument, but your solution shoul
 
 */
 
-function delay(func,timeout){
-    return function(...args){
-        setTimeout(()=>{
-            func.apply(this,args)
-        },timeout)
-    }
+function delay(func, timeout) {
+  return function (...args) {
+    setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
 }
 
 function f(x) {
-    console.log(x);
+  console.log(x);
 }
 
 // create wrappers
 let f1000 = delay(f, 5000);
 let f1500 = delay(f, 1500);
 
-f1000("test1"); // shows "test" after 1000ms
-f1500("test2"); // shows "test" after 1500ms
+f1000('test1'); // shows "test" after 1000ms
+f1500('test2'); // shows "test" after 1500ms
