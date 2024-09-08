@@ -39,6 +39,12 @@ class GenericTee {
     }
   }
   levelOrderTraversalGenericTree(){
+    /**
+     * It happens in three steps
+     * 1. Remove
+     * 2. Print
+     * 3. Add childreen
+     */
     let qu=[];
     qu.push(this.root);
     let ans=''
